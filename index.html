@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proactive Health Companion | AI-Powered Digital Healthcare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #CC0033;
+            --primary-light: #ff688d;
+            --primary-dark: #72001c;
+            --secondary: #150bd3;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+        }
+
+        body {
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #0ca678;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--gray);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            font-weight: 500;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 10rem 0 5rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Profiling Section */
+        .profiling {
+            background-color: #f1f5f9;
+        }
+
+        .profiling-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .profiling-text {
+            flex: 1;
+        }
+
+        .profiling-visual {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .matrix {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 5px;
+            aspect-ratio: 1;
+            margin-top: 1.5rem;
+        }
+
+        .matrix-cell {
+            background-color: var(--gray-light);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 0.2rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .matrix-cell:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .matrix-axes {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* How It Works Section */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--gray-light);
+            z-index: 1;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            padding: 0 1rem;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .cta h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #cbd5e1;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            nav {
+                width: 100%;
+                display: none;
+                margin-top: 1rem;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 8rem 0 3rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .profiling-content {
+                flex-direction: column;
+            }
+            
+            .steps {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .steps::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>HealthCompanion</span>
+            </a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#profiling">Profiling</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#" class="btn">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Transform Healthcare from Reactive to Proactive</h1>
+            <p>Our AI-powered health companion delivers personalized guidance through dynamic profiling and multi-touchpoint engagement, building a complete digital healthcare ecosystem.</p>
+            <div class="hero-btns">
+                <a href="#profiling" class="btn">Explore Our Approach</a>
+                <a href="#contact" class="btn btn-outline">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Revolutionizing Digital Healthcare</h2>
+                <p>Our platform combines advanced AI with personalized engagement to create a seamless health management experience.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>AI-Powered Insights</h3>
+                    <p>Advanced algorithms analyze your health data to provide personalized recommendations and early warnings.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Dynamic Health Profiling</h3>
+                    <p>Our unique 4-profile matrix adapts as your health and confidence change, ensuring relevant guidance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Multi-Touchpoint Engagement</h3>
+                    <p>Receive personalized nudges through app notifications, emails, SMS, and voice assistants.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-ecosystem"></i>
+                    </div>
+                    <h3>Healthcare Ecosystem</h3>
+                    <p>Connect providers, payers, and patients in a unified platform for better health outcomes.</p>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                             <i class="fas fa-ecosystem"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Profiling Section -->
+<section class="profiling" id="profiling">
+    <div class="container">
+        <div class="section-title">
+            <h2>Dynamic Health Profiling Matrix</h2>
+            <p>Our innovative approach classifies users into 4 distinct profiles based on Health Confidence and Clinical Health Status to deliver hyper-personalized care.</p>
+        </div>
+        <div class="profiling-content">
+            <div class="profiling-text">
+                <h3>Four Distinct Health Profiles</h3>
+                <p>We plot each user on a matrix with two axes:</p>
+                <ul>
+                    <li><strong>Health Engagement Confidence:</strong> From Low Confidence to High Confidence</li>
+                    <li><strong>Clinical Health Status:</strong> From Low Health to High Health</li>
+                </ul>
+                <p>This creates 4 unique profiles that allow our AI to understand not just what your health status is, but how you're equipped to manage it.</p>
+                
+                <div class="profile-descriptions">
+                    <div class="profile-item">
+                        <h4><span class="profile-indicator high-health-high-conf"></span> Living Healthy</h4>
+                        <p>High Health, High Confidence - Individuals who are in good health and actively engaged in maintaining their wellbeing.</p>
+                    </div>
+                    <div class="profile-item">
+                        <h4><span class="profile-indicator low-health-low-conf"></span> Trotting Along</h4>
+                        <p>Low Health, Low Confidence - Individuals facing health challenges with limited engagement in their care.</p>
+                    </div>
+                    <div class="profile-item">
+                        <h4><span class="profile-indicator high-health-low-conf"></span> Living Cautiously</h4>
+                        <p>High Health, Low Confidence - Individuals in good health but with concerns about maintaining their wellbeing.</p>
+                    </div>
+                    <div class="profile-item">
+                        <h4><span class="profile-indicator low-health-high-conf"></span> Living Precariously</h4>
+                        <p>Low Health, High Confidence - Individuals facing health challenges but actively engaged in managing their condition.</p>
+                    </div>
+                </div>
+                
+                <a href="#" class="btn">Learn More About Profiling</a>
+            </div>
+            <div class="profiling-visual">
+                <h3>Health Profiling Matrix</h3>
+                <p>Click on each profile to learn more</p>
+                <div class="matrix-4x4">
+                    <div class="matrix-row">
+                        <div class="matrix-cell empty"></div>
+                        <div class="matrix-axis-label">High Health</div>
+                        <div class="matrix-axis-label">Low Health</div>
+                    </div>
+                    <div class="matrix-row">
+                        <div class="matrix-axis-label vertical">High Confidence</div>
+                        <div class="matrix-cell profile-cell" data-profile="living-healthy">
+                            <div class="profile-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <span>Living Healthy</span>
+                        </div>
+                        <div class="matrix-cell profile-cell" data-profile="living-precariously">
+                            <div class="profile-icon">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <span>Living Precariously</span>
+                        </div>
+                    </div>
+                    <div class="matrix-row">
+                        <div class="matrix-axis-label vertical">Low Confidence</div>
+                        <div class="matrix-cell profile-cell" data-profile="living-cautiously">
+                            <div class="profile-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <span>Living Cautiously</span>
+                        </div>
+                        <div class="matrix-cell profile-cell" data-profile="trotting-along">
+                            <div class="profile-icon">
+                                <i class="fas fa-walking"></i>
+                            </div>
+                            <span>Trotting Along</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-detail" id="profile-detail">
+                    <h4>Select a profile to learn more</h4>
+                    <p>Click on any of the four profiles in the matrix above to see detailed information about that health profile.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.profile-descriptions {
+    margin: 1.5rem 0;
+}
+
+.profile-item {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #f8fafc;
+    border-radius: 6px;
+    border-left: 4px solid var(--primary);
+}
+
+.profile-item h4 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.profile-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.high-health-high-conf {
+    background-color: #10b981; /* Green */
+}
+
+.low-health-low-conf {
+    background-color: #ef4444; /* Red */
+}
+
+.high-health-low-conf {
+    background-color: #f59e0b; /* Amber */
+}
+
+.low-health-high-conf {
+    background-color: #3b82f6; /* Blue */
+}
+
+.matrix-4x4 {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr;
+    gap: 10px;
+    margin: 1.5rem 0;
+}
+
+.matrix-row {
+    display: contents;
+}
+
+.matrix-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    min-height: 120px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.matrix-cell.empty {
+    background: transparent;
+    cursor: default;
+}
+
+.matrix-cell.profile-cell {
+    background-color: #f1f5f9;
+    border: 2px solid #e2e8f0;
+}
+
+.matrix-cell.profile-cell:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.matrix-cell[data-profile="living-healthy"]:hover {
+    background-color: #d1fae5;
+    border-color: #10b981;
+}
+
+.matrix-cell[data-profile="trotting-along"]:hover {
+    background-color: #fee2e2;
+    border-color: #ef4444;
+}
+
+.matrix-cell[data-profile="living-cautiously"]:hover {
+    background-color: #fef3c7;
+    border-color: #f59e0b;
+}
+
+.matrix-cell[data-profile="living-precariously"]:hover {
+    background-color: #dbeafe;
+    border-color: #3b82f6;
+}
+
+.profile-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.matrix-cell[data-profile="living-healthy"] .profile-icon {
+    color: #10b981;
+}
+
+.matrix-cell[data-profile="trotting-along"] .profile-icon {
+    color: #ef4444;
+}
+
+.matrix-cell[data-profile="living-cautiously"] .profile-icon {
+    color: #f59e0b;
+}
+
+.matrix-cell[data-profile="living-precariously"] .profile-icon {
+    color: #3b82f6;
+}
+
+.matrix-axis-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--gray);
+}
+
+.matrix-axis-label.vertical {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+}
+
+.profile-detail {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-top: 1.5rem;
+}
+
+.profile-detail.active {
+    border-left: 4px solid var(--primary);
+}
+
+@media (max-width: 768px) {
+    .matrix-4x4 {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr 1fr;
+    }
+    
+    .matrix-axis-label.vertical {
+        writing-mode: horizontal-tb;
+        transform: none;
+        grid-column: 1 / span 2;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+    
+    .matrix-axis-label:first-child {
+        display: none;
+    }
+    
+    .matrix-row:first-child {
+        display: none;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const profileCells = document.querySelectorAll('.profile-cell');
+    const profileDetail = document.getElementById('profile-detail');
+    
+    const profileData = {
+        'living-healthy': {
+            title: 'Living Healthy',
+            description: 'Individuals in this quadrant enjoy good health and have high confidence in managing their wellbeing. They are proactive about maintaining their health through regular exercise, balanced nutrition, and preventive care.',
+            characteristics: ['High energy levels', 'Regular physical activity', 'Balanced diet', 'Proactive health screenings', 'Strong health literacy'],
+            recommendations: ['Continue current healthy habits', 'Explore advanced wellness optimization', 'Consider mentoring others in health journey']
+        },
+        'trotting-along': {
+            title: 'Trotting Along',
+            description: 'These individuals face health challenges and have low confidence in their ability to manage their condition. They may feel overwhelmed by their health issues and struggle to engage consistently with care recommendations.',
+            characteristics: ['Multiple health concerns', 'Low health engagement', 'Difficulty following treatment plans', 'Limited health literacy', 'Feelings of overwhelm'],
+            recommendations: ['Simplify health messaging', 'Provide gentle reminders', 'Connect with peer support groups', 'Break goals into small, manageable steps']
+        },
+        'living-cautiously': {
+            title: 'Living Cautiously',
+            description: 'While in good health, these individuals have low confidence about maintaining their wellbeing. They may be health-anxious or recently recovered from an illness, leading to cautious behavior around health decisions.',
+            characteristics: ['Good physical health', 'Health anxiety or concerns', 'Seek frequent reassurance', 'Cautious approach to new health information', 'May over-research health topics'],
+            recommendations: ['Provide evidence-based reassurance', 'Gradual exposure to health activities', 'Build confidence through small successes', 'Focus on health maintenance strategies']
+        },
+        'living-precariously': {
+            title: 'Living Precariously',
+            description: 'These individuals face significant health challenges but maintain high confidence and engagement in managing their conditions. They are knowledgeable about their health issues and actively participate in treatment decisions.',
+            characteristics: ['Complex health conditions', 'High health literacy', 'Active in treatment decisions', 'Regular communication with providers', 'Strong self-advocacy skills'],
+            recommendations: ['Provide advanced condition management tools', 'Facilitate care coordination', 'Offer opportunities for peer mentoring', 'Support advocacy efforts']
+        }
+    };
+    
+    profileCells.forEach(cell => {
+        cell.addEventListener('click', function() {
+            const profile = this.getAttribute('data-profile');
+            const data = profileData[profile];
+            
+            profileDetail.innerHTML = `
+                <h4>${data.title}</h4>
+                <p>${data.description}</p>
+                <div class="profile-characteristics">
+                    <h5>Key Characteristics:</h5>
+                    <ul>
+                        ${data.characteristics.map(char => `<li>${char}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="profile-recommendations">
+                    <h5>Recommended Approach:</h5>
+                    <ul>
+                        ${data.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            profileDetail.classList.add('active');
+        });
+    });
+});
+</script>
+    <!-- Profiling Section -->
+        <!-- <section class="profiling" id="profiling">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Dynamic Health Profiling Matrix</h2>
+                    <p>Our innovative approach classifies users based on Health Confidence and Clinical Health Status to deliver hyper-personalized care.</p>
+                </div>
+                <div class="profiling-content">
+                    <div class="profiling-text">
+                        <h3>16 Distinct Health Profiles</h3>
+                        <p>We plot each user on a matrix with two axes:</p>
+                        <ul>
+                            <li><strong>Health Engagement Confidence:</strong> From Low Confidence/Disengaged to High Confidence/Proactive</li>
+                            <li><strong>Clinical Health Status:</strong> From At-Risk/Managing Conditions to Optimal/Healthy</li>
+                        </ul>
+                        <p>This creates 16 unique profiles that allow our AI to understand not just what your health status is, but how you're equipped to manage it.</p>
+                        <p>Examples include "The Anxious & At-Risk," "The Proactive Patient," "The Compliant Healthy," and "The Wellness Enthusiast."</p>
+                        <a href="#" class="btn">Learn More About Profiling</a>
+                    </div>
+                    <div class="profiling-visual">
+                        <h3>Health Profiling Matrix</h3>
+                        <p>Hover over each cell to see example profiles</p>
+                        <div class="matrix">
+                            <!-- This is a simplified visual representation -->
+                            <!-- <div class="matrix-cell">Anxious & At-Risk</div>
+                            <div class="matrix-cell">Struggling Chronic</div>
+                            <div class="matrix-cell">Managed Condition</div>
+                            <div class="matrix-cell">Proactive Patient</div>
+                            <div class="matrix-cell">Health Anxious</div>
+                            <div class="matrix-cell">Disengaged</div>
+                            <div class="matrix-cell">Compliant Healthy</div>
+                            <div class="matrix-cell">Informed Healthy</div>
+                            <div class="matrix-cell">Newly Healthy</div>
+                            <div class="matrix-cell">Cautious Healthy</div>
+                            <div class="matrix-cell">Balanced Healthy</div>
+                            <div class="matrix-cell">Health Conscious</div>
+                            <div class="matrix-cell">Newly Active</div>
+                            <div class="matrix-cell">Motivated Beginner</div>
+                            <div class="matrix-cell">Active & Engaged</div>
+                            <div class="matrix-cell">Wellness Enthusiast</div>
+                        </div>
+                        <div class="matrix-axes">
+                            <span>Low Confidence</span>
+                            <span>High Confidence</span>
+                        </div>
+                        <div style="text-align: center; margin-top: 0.5rem;">
+                            <small>Clinical Health Status →</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> --> -->
+
+    <!-- How It Works Section -->
+    <section id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How The Health Companion Works</h2>
+                <p>Our AI-driven platform creates a continuous feedback loop to keep you on track with your health goals.</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Profile Creation</h3>
+                    <p>We build your dynamic health profile by integrating data from wearables, health records, and your inputs.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Analysis</h3>
+                    <p>Our algorithms analyze your data to identify patterns, risks, and opportunities for improvement.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Personalized Guidance</h3>
+                    <p>You receive tailored recommendations, reminders, and insights based on your specific profile.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Continuous Adaptation</h3>
+                    <p>The system learns from your interactions and updates your profile as your health journey evolves.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>Ready to Transform Your Healthcare Experience?</h2>
+            <p>Join the future of proactive health management with our AI-powered companion.</p>
+            <a href="#" class="btn btn-secondary">Request a Demo</a>
+            <a href="#" class="btn btn-outline" style="margin-left: 1rem; border-color: white; color: white;">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>HealthCompanion</h3>
+                    <p>Transforming healthcare from reactive to proactive through AI-powered personalized engagement.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#profiling">Profiling</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Research</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> TDA X Health Competition Team </li>
+                        <li><i class="fas fa-phone"></i> 1234 5678 </li>
+                        <li><i class="fas fa-map-marker-alt"></i> HK Financial Centre </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 AI Health Companion. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('nav').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
