@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Health Companion - Risk Modification Diagram</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #d31145;
+            --primary-light: #e83a67;
+            --primary-dark: #a50e36;
+            --secondary: #10b981;
+            --secondary-light: #34d399;
+            --accent: #8b5cf6;
+            --dark: #1e293b;
+            --dark-light: #334155;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, #0f172a 100%);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Animation Container */
+        .animation-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            margin: 3rem 0;
+        }
+
+        /* Timeline */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            z-index: 1;
+        }
+
+        .timeline-phase {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            background: var(--dark);
+            padding: 0 1rem;
+        }
+
+        .phase-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--dark);
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .phase-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        /* Process Flow */
+        .process-flow {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .old-system, .new-system {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .system-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .old-system .system-title {
+            border-color: var(--gray);
+        }
+
+        .flow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .flow-step:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .old-system .step-icon {
+            background: var(--gray);
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Risk Modification Animation */
+        .risk-animation {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .animation-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--light);
+        }
+
+        .risk-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            height: 200px;
+        }
+
+        .risk-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .risk-bubble {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .bubble-high {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            box-shadow: 0 0 30px rgba(211, 17, 69, 0.5);
+        }
+
+        .bubble-medium {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+            animation-delay: 0.5s;
+        }
+
+        .bubble-low {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+            animation-delay: 1s;
+        }
+
+        .risk-label {
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .risk-arrow {
+            flex: 1;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            position: relative;
+        }
+
+        .risk-arrow::after {
+            content: '→';
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--secondary);
+            font-size: 1.5rem;
+        }
+
+        .ai-intervention {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(139, 92, 246, 0.9);
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            z-index: 3;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        /* Data Points */
+        .data-points {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .data-point {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .data-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .data-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
+            100% { box-shadow: 0 0 30px rgba(139, 92, 246, 0.8); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .process-flow {
+                grid-template-columns: 1fr;
+            }
+            
+            .risk-flow {
+                flex-direction: column;
+                height: auto;
+                gap: 2rem;
+            }
+            
+            .risk-arrow {
+                width: 3px;
+                height: 50px;
+            }
+            
+            .risk-arrow::after {
+                content: '↓';
+                right: 50%;
+                top: 100%;
+                transform: translateX(50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                AI Health Companion
+            </div>
+            <p class="subtitle">Transforming Insurance Risk Through Behavioral Modification & AI Profiling</p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline">
+            <div class="timeline-phase">
+                <div class="phase-icon">
+                    <i class="fas fa-box"></i>
+                </div>
+                <div class="phase-title">Traditional<br>Black Box</div>
+            </div>
+            <div class="timeline-phase">
+                <div class="phase-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="phase-title">AI Profiling<br>System</div>
+            </div>
+            <div class="timeline-phase">
+                <div class="phase-icon">
+                    <i class="fas fa-user-cog"></i>
+                </div>
+                <div class="phase-title">Hyper-<br>Personalization</div>
+            </div>
+            <div class="timeline-phase">
+                <div class="phase-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="phase-title">Risk<br>Modification</div>
+            </div>
+        </div>
+
+        <!-- Process Flow -->
+        <div class="process-flow">
+            <div class="old-system">
+                <h3 class="system-title">Traditional Insurance Model</h3>
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <div class="step-icon">
+                            <i class="fas fa-question"></i>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-title">Black Box Risk Assessment</div>
+                            <div class="step-description">Limited data points, statistical models only</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-title">Standard Premiums</div>
+                            <div class="step-description">One-size-fits-all pricing based on demographics</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon">
+                            <i class="fas fa-hospital"></i>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-title">Reactive Claims Processing</div>
+                            <div class="step-description">Pay when health issues occur, no prevention</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-title">Rising Costs</div>
+                            <div class="step-description">Increasing premiums, no risk modification</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="new-system">
+                <h3 class="system-title">AI-Driven Insurance Model</h3>
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <div class="step-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-title">AI Health Profiling</div>
+                            <div class="step-description">Continuous monitoring & behavioral analysis</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-title">Personalized Interventions</div>
+                            <div class="step-description">Tailored nudges, rewards, and guidance</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-title">Behavior Modification</div>
+                            <div class="step-description">Sustainable lifestyle changes through AI partnership</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon">
+                            <i class="fas fa-trend-down"></i>
+                        </div>
+                        <div class="step-content">
+                            <div class="step-title">Risk Reduction</div>
+                            <div class="step-description">Measurable decrease in health risks & claims</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Risk Modification Animation -->
+        <div class="risk-animation">
+            <h3 class="animation-title">AI-Driven Risk Modification Process</h3>
+            <div class="risk-flow">
+                <div class="risk-node">
+                    <div class="risk-bubble bubble-high">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="risk-label">High Risk Profile</div>
+                </div>
+                
+                <div class="risk-arrow"></div>
+                
+                <div class="ai-intervention">
+                    <i class="fas fa-robot"></i>
+                    AI Health Companion
+                </div>
+                
+                <div class="risk-arrow"></div>
+                
+                <div class="risk-node">
+                    <div class="risk-bubble bubble-low">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="risk-label">Modified Risk Profile</div>
+                </div>
+            </div>
+
+            <div class="data-points">
+                <div class="data-point">
+                    <div class="data-icon">
+                        <i class="fas fa-walking"></i>
+                    </div>
+                    <div class="data-label">Activity Tracking</div>
+                </div>
+                <div class="data-point">
+                    <div class="data-icon">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <div class="data-label">Nutrition Analysis</div>
+                </div>
+                <div class="data-point">
+                    <div class="data-icon">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <div class="data-label">Sleep Monitoring</div>
+                </div>
+                <div class="data-point">
+                    <div class="data-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="data-label">Health Metrics</div>
+                </div>
+                <div class="data-point">
+                    <div class="data-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="data-label">AI Insights</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value">42%</div>
+                <div class="stat-label">Reduction in High-Risk Profiles</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">67%</div>
+                <div class="stat-label">User Engagement Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">28%</div>
+                <div class="stat-label">Decrease in Claims</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">89%</div>
+                <div class="stat-label">User Satisfaction</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>AI Health Companion Risk Modification System &copy; 2023</p>
+            <p>Transforming insurance from reactive claims processing to proactive health partnership</p>
+        </div>
+    </div>
+
+    <script>
+        // Simple animations for the diagram
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate timeline phases on scroll
+            const timelinePhases = document.querySelectorAll('.timeline-phase');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.6s ease-out forwards';
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            timelinePhases.forEach(phase => {
+                observer.observe(phase);
+            });
+            
+            // Animate risk flow continuously
+            setInterval(() => {
+                const arrows = document.querySelectorAll('.risk-arrow');
+                arrows.forEach(arrow => {
+                    arrow.style.background = 'linear-gradient(90deg, var(--primary), var(--secondary))';
+                    setTimeout(() => {
+                        arrow.style.background = 'linear-gradient(90deg, var(--secondary), var(--primary))';
+                    }, 1000);
+                });
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
