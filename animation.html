@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Profile Simulation - Data Ecosystem</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #d31145;
+            --primary-light: #e83a67;
+            --primary-dark: #a50e36;
+            --secondary: #10b981;
+            --secondary-light: #34d399;
+            --accent: #8b5cf6;
+            --dark: #1e293b;
+            --dark-light: #334155;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, #0f172a 100%);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 1rem;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 3rem 0;
+            min-height: 70vh;
+        }
+
+        /* Animation Section */
+        .animation-section {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            height: 600px;
+        }
+
+        .animation-title {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.9);
+            z-index: 10;
+        }
+
+        /* Data Ecosystem Animation */
+        .data-ecosystem {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .central-ai {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 0 40px rgba(211, 17, 69, 0.5);
+            z-index: 5;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .data-node {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .node-1 {
+            top: 20%;
+            left: 20%;
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+            animation-delay: 0s;
+        }
+
+        .node-2 {
+            top: 20%;
+            right: 20%;
+            background: linear-gradient(135deg, var(--accent), #a78bfa);
+            animation-delay: 1s;
+        }
+
+        .node-3 {
+            bottom: 20%;
+            left: 20%;
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            animation-delay: 2s;
+        }
+
+        .node-4 {
+            bottom: 20%;
+            right: 20%;
+            background: linear-gradient(135deg, #06b6d4, #22d3ee);
+            animation-delay: 3s;
+        }
+
+        .data-stream {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+            transform-origin: left center;
+            z-index: 1;
+            opacity: 0.7;
+        }
+
+        .stream-1 {
+            width: 200px;
+            top: 55px;
+            left: 190px;
+            transform: rotate(135deg);
+            animation: dataFlow 3s linear infinite;
+        }
+
+        .stream-2 {
+            width: 200px;
+            top: 55px;
+            right: 190px;
+            transform: rotate(45deg);
+            animation: dataFlow 3s linear infinite 0.5s;
+        }
+
+        .stream-3 {
+            width: 200px;
+            bottom: 55px;
+            left: 190px;
+            transform: rotate(225deg);
+            animation: dataFlow 3s linear infinite 1s;
+        }
+
+        .stream-4 {
+            width: 200px;
+            bottom: 55px;
+            right: 190px;
+            transform: rotate(315deg);
+            animation: dataFlow 3s linear infinite 1.5s;
+        }
+
+        /* Profile Cards Section */
+        .profiles-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+            text-align: center;
+        }
+
+        .profile-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-card.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(211, 17, 69, 0.3);
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .profile-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--light);
+        }
+
+        .risk-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .risk-low {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--secondary-light);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .risk-medium {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .risk-high {
+            background: rgba(211, 17, 69, 0.2);
+            color: var(--primary-light);
+            border: 1px solid rgba(211, 17, 69, 0.3);
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .profile-details {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-label {
+            color: var(--gray);
+        }
+
+        .detail-value {
+            color: var(--light);
+            font-weight: 500;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes dataFlow {
+            0% { transform: rotate(var(--angle, 0deg)) scaleX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: rotate(var(--angle, 0deg)) scaleX(1); opacity: 0; }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .animation-section {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                AI Profile Simulation
+            </div>
+            <p class="subtitle">Real-time data ecosystem visualization and personalized health risk profiling</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Animation Section -->
+            <div class="animation-section">
+                <div class="animation-title">AI Data Ecosystem in Motion</div>
+                <div class="data-ecosystem">
+                    <div class="central-ai">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    
+                    <div class="data-node node-1">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="data-node node-2">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <div class="data-node node-3">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <div class="data-node node-4">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    
+                    <div class="data-stream stream-1" style="--angle: 135deg"></div>
+                    <div class="data-stream stream-2" style="--angle: 45deg"></div>
+                    <div class="data-stream stream-3" style="--angle: 225deg"></div>
+                    <div class="data-stream stream-4" style="--angle: 315deg"></div>
+                </div>
+            </div>
+
+            <!-- Profile Cards Section -->
+            <div class="profiles-section">
+                <h2 class="section-title">Health Risk Profiles</h2>
+                <div class="profile-cards">
+                    <!-- Profile 1 -->
+                    <div class="profile-card active">
+                        <div class="profile-header">
+                            <div class="profile-name">Living Healthy</div>
+                            <div class="risk-badge risk-low">Low Risk</div>
+                        </div>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <div class="stat-value">92%</div>
+                                <div class="stat-label">Health Score</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">15%</div>
+                                <div class="stat-label">Risk Reduction</div>
+                            </div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Activity Level:</span>
+                                <span class="detail-value">High</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Nutrition:</span>
+                                <span class="detail-value">Optimal</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Sleep Quality:</span>
+                                <span class="detail-value">Excellent</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile 2 -->
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="profile-name">Living Precariously</div>
+                            <div class="risk-badge risk-high">High Risk</div>
+                        </div>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <div class="stat-value">42%</div>
+                                <div class="stat-label">Health Score</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">65%</div>
+                                <div class="stat-label">Risk Reduction</div>
+                            </div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Activity Level:</span>
+                                <span class="detail-value">Sedentary</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Nutrition:</span>
+                                <span class="detail-value">Poor</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Sleep Quality:</span>
+                                <span class="detail-value">Insufficient</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile 3 -->
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="profile-name">Living Cautiously</div>
+                            <div class="risk-badge risk-medium">Medium Risk</div>
+                        </div>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <div class="stat-value">68%</div>
+                                <div class="stat-label">Health Score</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">35%</div>
+                                <div class="stat-label">Risk Reduction</div>
+                            </div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Activity Level:</span>
+                                <span class="detail-value">Moderate</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Nutrition:</span>
+                                <span class="detail-value">Balanced</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Sleep Quality:</span>
+                                <span class="detail-value">Good</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile 4 -->
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="profile-name">Trotting Along</div>
+                            <div class="risk-badge risk-medium">Moderate Risk</div>
+                        </div>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <div class="stat-value">75%</div>
+                                <div class="stat-label">Health Score</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">25%</div>
+                                <div class="stat-label">Risk Reduction</div>
+                            </div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Activity Level:</span>
+                                <span class="detail-value">Regular</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Nutrition:</span>
+                                <span class="detail-value">Varied</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Sleep Quality:</span>
+                                <span class="detail-value">Adequate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>AI Health Champion Simulation &copy; 2023 | Real-time Risk Assessment & Personalization</p>
+        </footer>
+    </div>
+
+    <script>
+        // Profile card interaction
+        document.querySelectorAll('.profile-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove active class from all cards
+                document.querySelectorAll('.profile-card').forEach(c => {
+                    c.classList.remove('active');
+                });
+                
+                // Add active class to clicked card
+                this.classList.add('active');
+                
+                // Update animation based on selected profile
+                updateAnimation(this);
+            });
+        });
+
+        // Update animation based on selected profile
+        function updateAnimation(profileCard) {
+            const profileName = profileCard.querySelector('.profile-name').textContent;
+            const centralAI = document.querySelector('.central-ai');
+            
+            // Change central AI color based on risk level
+            if (profileName === 'Living Healthy') {
+                centralAI.style.background = 'radial-gradient(circle, var(--secondary), var(--secondary-light))';
+            } else if (profileName === 'Living Precariously') {
+                centralAI.style.background = 'radial-gradient(circle, var(--primary), var(--primary-dark))';
+            } else if (profileName === 'Living Cautiously') {
+                centralAI.style.background = 'radial-gradient(circle, #f59e0b, #fbbf24)';
+            } else {
+                centralAI.style.background = 'radial-gradient(circle, var(--accent), #a78bfa)';
+            }
+            
+            // Pulse animation for selected profile
+            centralAI.style.animation = 'pulse 1s ease-in-out';
+            setTimeout(() => {
+                centralAI.style.animation = 'pulse 4s ease-in-out infinite';
+            }, 1000);
+        }
+
+        // Auto-rotate profiles for demonstration
+        let currentProfile = 0;
+        const profiles = document.querySelectorAll('.profile-card');
+        
+        function rotateProfiles() {
+            profiles.forEach(profile => profile.classList.remove('active'));
+            profiles[currentProfile].classList.add('active');
+            updateAnimation(profiles[currentProfile]);
+            
+            currentProfile = (currentProfile + 1) % profiles.length;
+        }
+        
+        // Start auto-rotation after 5 seconds
+        setTimeout(() => {
+            setInterval(rotateProfiles, 4000);
+        }, 5000);
+    </script>
+</body>
+</html>
